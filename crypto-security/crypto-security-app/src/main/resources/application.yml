@@ -1,4 +1,12 @@
+server:
+  port: 80
+#  servlet:
+#    context-path: /api/crypto-security
+
 spring:
+  main:
+    allow-bean-definition-overriding: true # bean定义可覆盖
+    banner-mode: off # 不打印banner
   application:
     name: crypto-security-app
   profiles:
@@ -7,3 +15,9 @@ spring:
     import:
       - optional:classpath:/application.yml
       - optional:classpath:/application-${spring.profiles.active}.yml
+
+
+# 日志级别
+logging:
+  level:
+    root: INFO

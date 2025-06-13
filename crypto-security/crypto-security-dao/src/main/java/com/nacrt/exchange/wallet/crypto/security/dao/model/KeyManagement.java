@@ -52,7 +52,4 @@ public class KeyManagement {
 
     @UpdateTimestamp
     private LocalDateTime updateTime;
-
-    @Version
-    private Long version;  // 乐观锁版本号
-} 
+}

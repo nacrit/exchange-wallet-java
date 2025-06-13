@@ -29,6 +29,8 @@ public class AddressService {
             String mnemonic = Strings.join(WalletUtil.generateMnemonic(12), " ");
             masterKey.setEncryptedMnemonic(mnemonic);
             masterKey.setEncryptedMasterPrivateKey(mnemonic);
+            masterKey.setCreatedBy("nacrt");
+            masterKey.setIsActive(true);
             masterKeyRepository.save(masterKey);
         }
         String mnemonicStr = masterKey.getEncryptedMnemonic();
@@ -36,7 +38,11 @@ public class AddressService {
         String address = WalletUtil.generateAddress(mnemonic, 0);
         KeyManagement keyManagement = new KeyManagement();
         keyManagement.setAddress(address);
-        keyManagement.setMasterKey(new MasterKey());
+        keyManagement.setChainId(chain);
+        keyManagement.setMasterKey(masterKey);
+        keyManagement.setCreatedBy("nacrt");
+        keyManagement.setUpdatedBy("nacrt");
+        keyManagement.setIsActive(true);
         keyManagementRepository.save(keyManagement);
         return new NewAddressRes(address, address + body.getChain());
     }
