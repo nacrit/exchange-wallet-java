@@ -12,8 +12,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
     "com.nacrt.exchange.wallet.crypto.security.service",
     "com.nacrt.exchange.wallet.crypto.security.open"
 })
-@EntityScan("com.nacrt.exchange.wallet.crypto.security.dao.model")
-@EnableJpaRepositories("com.nacrt.exchange.wallet.crypto.security.dao.repository")
+@EntityScan(basePackages = "com.nacrt.exchange.wallet.crypto.security.dao.model")
+@EnableJpaRepositories(basePackages = "com.nacrt.exchange.wallet.crypto.security.dao.repository")
 public class CryptoSecurityApplication {
     public static void main(String[] args) {
         SpringApplication.run(CryptoSecurityApplication.class, args);
