@@ -7,6 +7,11 @@ spring:
     import:
       - optional:classpath:/application.yml
       - optional:classpath:/application-${spring.profiles.active}.yml
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
 #server:
 #  port: 8080
