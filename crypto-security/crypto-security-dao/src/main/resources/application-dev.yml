@@ -3,8 +3,48 @@ spring:
     url: jdbc:mysql://localhost:3306/crypto-security?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: crypto-security
     password: 123456
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: false
+      idle-timeout: 30000
+      pool-name: HikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 50
+        order_inserts: true
+        order_updates: true
+        generate_statistics: true
+        connection:
+          provider_disables_autocommit: true
+        # 强制创建表
+        hbm2ddl:
+          auto: create
+        # 显示建表SQL
+        show_sql: true
+        # 格式化SQL
+        format_sql: true
+        # 显示更详细的SQL
+        use_sql_comments: true
+        # 显示SQL参数
+        show_sql_comments: true
+        # 显示SQL参数值
+        show_sql_values: true
 
-#logging:
-#  level:
-#    root: DEBUG
-#    com.nacrt.exchange.wallet.crypto.security: DEBUG
+#server:
+#  port: 80
+#  servlet:
+#    context-path: /api/crypto-security
+
+logging:
+  level:
+    root: INFO
