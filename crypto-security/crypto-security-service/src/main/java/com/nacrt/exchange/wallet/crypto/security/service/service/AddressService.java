@@ -35,14 +35,17 @@ public class AddressService {
         }
         String mnemonicStr = masterKey.getEncryptedMnemonic();
         List<String> mnemonic = Arrays.stream(mnemonicStr.split(" ")).toList();
-        String address = WalletUtil.generateAddress(mnemonic, 0);
+        String address = WalletUtil.generateAddress(mnemonic, Integer.parseInt(body.getChildNumber()));
         KeyManagement keyManagement = new KeyManagement();
         keyManagement.setAddress(address);
+        keyManagement.setPublicKey(address);
         keyManagement.setChainId(chain);
+        keyManagement.setEncryptedPrivateKey(mnemonicStr);
         keyManagement.setMasterKey(masterKey);
         keyManagement.setCreatedBy("nacrt");
         keyManagement.setUpdatedBy("nacrt");
         keyManagement.setIsActive(true);
+        keyManagement.setDerivationPath(body.getChildNumber());
         keyManagementRepository.save(keyManagement);
         return new NewAddressRes(address, address + body.getChain());
     }

@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class NewAddressReq {
     private String chain;
-
+    private String childNumber;
 }
