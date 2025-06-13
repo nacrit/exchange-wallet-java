@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.nacrt.exchange.wallet</groupId>
+        <artifactId>exchange-wallet-java</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>asset-business</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>asset-business-open</module>
+        <module>asset-business-service</module>
+        <module>asset-business-app</module>
+    </modules>
+</project>
