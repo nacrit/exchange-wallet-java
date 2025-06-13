@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # MySQL 服务
+  mysql8:
+    image: mysql:8.0
+    container_name: mysql8
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # 设置root密码
+      MYSQL_DATABASE: crypto-security    # 自动创建数据库
+      MYSQL_USER: crypto-security        # 创建普通用户
+      MYSQL_PASSWORD: 123456
+    volumes:
+      - ./mysql/data:/var/lib/mysql        # 数据持久化
+    ports:
+      - "3306:3306"
+    networks:
+      - app_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  # Redis 服务
+  redis7:
+    image: redis:7-alpine
+    container_name: redis7
+    volumes:
+      - ./redis/data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - app_net
+    command: redis-server --save 60 1 --loglevel warning
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # RabbitMQ 服务
+  rabbitmq4:
+    image: rabbitmq:4.0.7-management
+    container_name: rabbitmq4
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes: # 这里的插件目录没有用整个目录做映射，因为那样会覆盖容器内原有的插件，导致容器无法启动
+      - ./rabbitmq/data:/var/lib/rabbitmq
+      - ./rabbitmq/config/plugins/rabbitmq_delayed_message_exchange-v4.0.7.ez:/opt/rabbitmq/plugins/rabbitmq_delayed_message_exchange-v4.0.7.ez
+    command: sh -c "rabbitmq-plugins enable --offline rabbitmq_delayed_message_exchange && rabbitmq-server"
+    networks:
+      - app_net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+# 定义网络
+networks:
+  app_net:
+    driver: bridge

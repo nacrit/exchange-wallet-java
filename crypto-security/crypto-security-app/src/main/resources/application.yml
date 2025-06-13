@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: crypto-security
+  profiles:
+    active: dev
+  config:
+    import:
+      - optional:classpath:/application.yml
+      - optional:classpath*:/application.yml
+      - optional:classpath*:application.yml
+      - optional:classpath*:application-${spring.profiles.active}.yml
+
+#server:
+#  port: 8080
+#  servlet:
+#    context-path: /api/crypto-security
+
+logging:
+  level:
+    root: INFO
+    com.nacrt.exchange.wallet.crypto.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

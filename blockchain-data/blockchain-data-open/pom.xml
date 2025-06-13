@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.nacrt.exchange.wallet</groupId>
         <artifactId>blockchain-data</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>blockchain-data-open</artifactId>

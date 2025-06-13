@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/crypto-security?useSSL=false&serverTimezone=UTC
+    username: crypto-security
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update # 自动更新表结构
+    show-sql: true     # 打印SQL

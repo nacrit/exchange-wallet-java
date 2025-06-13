@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.nacrt.exchange.wallet</groupId>
         <artifactId>asset-business</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>asset-business-app</artifactId>
@@ -18,6 +18,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.nacrt.exchange.wallet</groupId>
+            <artifactId>asset-business-service</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
